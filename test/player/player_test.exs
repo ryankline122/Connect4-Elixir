@@ -4,7 +4,6 @@ defmodule Player.PlayerTest do
   alias Connect4.Player
 
   import Mock
-  import Connect4.Board
 
   # Couldn't figure out how to get setup to work. Maybe come back to this?
   @context %{
