@@ -10,12 +10,12 @@ defmodule Connect4.Player do
   """
   @players [1, 2]
 
-  @spec valid_player(number()) :: :ok | {:error, String.t()}
+  @spec valid_player(number()) :: {:ok, [[char()]]} | {:error, String.t()}
   def valid_player(player) when player in @players, do: :ok
   def valid_player(_), do: {:error, "Not a valid player"}
 
-  @spec take_turn(number()) :: {:ok, String.t()} | {:error, String.t()}
-  def take_turn(player) do
+  @spec take_turn(number(), [[String.t()]]) :: {:ok, String.t()} | {:error, String.t()}
+  def take_turn(player, board \\ []) do
     with :ok <- valid_player(player) do
       IO.puts("Player #{player}'s turn.")
       column = IO.gets("Enter a colum:") |> String.trim()
