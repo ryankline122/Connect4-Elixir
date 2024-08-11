@@ -1,14 +1,14 @@
-defmodule HelloMix.MixProject do
+defmodule Connect4.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :hello_mix,
+      app: :connect4,
       version: "0.1.0",
       elixir: "~> 1.12",
       escript: [
-        main_module: HelloMix,
-        path: "dist/app"
+        main_module: Connect4,
+        path: "dist/connect4"
       ],
       start_permanent: Mix.env() == :prod,
       deps: deps()
