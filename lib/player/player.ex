@@ -36,13 +36,11 @@ defmodule Connect4.Player do
     end
   end
 
-  @doc """
-  Attempts to update the game board in the column selected by the current player
-  """
   @spec drop_token(number(), String.t(), [[String.t()]]) :: {:ok, [[String.t()]]} | {:error, String.t()}
   defp drop_token(player, column, board) when column in @valid_moves do
     # TODO: Implement me
     {:ok, Board.create_board}
   end
-  defp drop_token(_, _, _), do: {:error, "Column out of range"}
+
+  defp drop_token(_, _, _), do: {:error, "Invalid move: Column out of range"}
 end

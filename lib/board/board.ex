@@ -7,6 +7,7 @@ defmodule Connect4.Board do
     - create_board()
     - print_board()
     - print_row()
+    - get_column()
   """
 
   @doc """
@@ -22,7 +23,6 @@ defmodule Connect4.Board do
       ["-", "-", "-", "-", "-", "-", "-"],
       ["-", "-", "-", "-", "-", "-", "-"],
       ["-", "-", "-", "-", "-", "-", "-"],
-      ["-", "-", "-", "-", "-", "-", "-"]
     ]
   end
 
@@ -42,9 +42,27 @@ defmodule Connect4.Board do
   @doc """
   Prints the provided row to the console with followed by a new line.
   """
-  @spec print_row([String.t()])
+  @spec print_row([String.t()]) :: :ok
   def print_row([h | t]) do
     IO.write(" #{h} ")
     print_row(t)
+  end
+
+
+  def get_column(col, board, curr_col \\ 0, accum \\ [])
+
+  def get_column(_, [], _, accum), do: tl(Enum.reverse(accum))
+
+  def get_column(col, board, curr_col, _) when curr_col < col do
+    reduced_board = for row <- board, do: tl(row)
+    get_column(col, reduced_board, curr_col + 1)
+  end
+
+  @doc """
+  Retrieves the requested column as a 1 dimensional list.
+  """
+  @spec get_column(number(), [[String.t()]], number(), [String.t()]) :: [any()]
+  def get_column(col, [h | t], curr_col, accum) do
+    get_column(col, t, curr_col, [hd(h) | accum])
   end
 end
