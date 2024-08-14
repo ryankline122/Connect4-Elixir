@@ -37,9 +37,18 @@ defmodule Connect4.Player do
   end
 
   @spec drop_token(number(), String.t(), [[String.t()]]) :: {:ok, [[String.t()]]} | {:error, String.t()}
-  defp drop_token(player, column, board) when column in @valid_moves do
-    # TODO: Implement me
-    {:ok, Board.create_board}
+  defp drop_token(player, column_label, board) when column_label in @valid_moves do
+    col_num = Board.get_column_number(column_label)
+    col = Board.get_column(col_num, board)
+
+    if hd(col) == "-" do
+      col = Board.update_column(player, col)
+
+      # TODO: this is broken
+      {:ok, Board.replace_column(col_num, col, board)}
+    else
+      {:error, "Invalid move: Column full"}
+    end
   end
 
   defp drop_token(_, _, _), do: {:error, "Invalid move: Column out of range"}

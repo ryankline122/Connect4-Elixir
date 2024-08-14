@@ -35,5 +35,41 @@ defmodule Board.BoardTest do
 
       assert(actual == expected)
     end
+
+    test "adds token to next open cell in column" do
+      initial = ["-", "-", "-", "-", "2", "1"]
+      expected = ["-", "-", "-", "1", "2", "1"]
+
+      actual = Board.update_column(1, initial)
+
+      assert actual == expected
+    end
+
+    test "replaces column in board at index 0" do
+      board = [
+        ["A", "B", "C", "D", "E", "F", "G"],
+        ["-", "-", "-", "-", "-", "-", "-"],
+        ["-", "-", "-", "-", "-", "-", "-"],
+        ["-", "-", "-", "-", "-", "-", "-"],
+        ["1", "-", "-", "-", "-", "-", "-"],
+        ["2", "-", "-", "-", "-", "-", "-"],
+        ["1", "-", "-", "-", "-", "-", "-"]
+      ]
+      updated_col = ["A", "-", "-", "2", "1", "2", "1"]
+
+      expected = [
+        ["A", "B", "C", "D", "E", "F", "G"],
+        ["-", "-", "-", "-", "-", "-", "-"],
+        ["-", "-", "-", "-", "-", "-", "-"],
+        ["2", "-", "-", "-", "-", "-", "-"],
+        ["1", "-", "-", "-", "-", "-", "-"],
+        ["2", "-", "-", "-", "-", "-", "-"],
+        ["1", "-", "-", "-", "-", "-", "-"]
+      ]
+
+      actual = Board.replace_column(0, updated_col, board)
+
+      assert(actual == expected)
+    end
   end
 end
