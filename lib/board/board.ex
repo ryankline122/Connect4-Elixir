@@ -12,7 +12,6 @@ defmodule Connect4.Board do
     - update_column()
     - replace_column()
   """
-
   @labels %{
     "A" => 0,
     "B" => 1,
